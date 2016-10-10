@@ -28,7 +28,7 @@ namespace GenericsPlay
             Hashtable hashtable = new Hashtable();
 
             // dictionary
-            
+
 
         }
 
@@ -90,6 +90,46 @@ namespace GenericsPlay
             var docList = new DocumentList<Document>();
             docList.Add(new Document());
             docList.Add(new Invoice());
+
+
+            var valore = GetDefault<string>();
+
+            AddCache("123", new Document());
+
+            var doc = GetCache<Document>("123");
+        }
+
+
+        public T GetDefault<T>() {
+            return default(T);
+        }
+
+
+
+        public T GetCache<T>(string key) where T:class {
+            object res = null; //carico da cache...
+            return res as T;
+        }
+
+        public void AddCache<T>(string key, T data) where T : class
+        {
+            
+        }
+
+
+        /// <summary>
+        /// BAD!
+        /// </summary>
+        static public void ProcessDocument<T>(T doc) where T : Document {
+            var invoice = doc as Invoice;
+            if (invoice != null) {
+                // TODO: cose per fatture
+            }
+
+            var bill = doc as WayBill;
+            if (bill != null) {
+                // TODO: cose pe bolle
+            }
         }
     }
 
