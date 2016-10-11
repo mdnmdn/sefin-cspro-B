@@ -11,7 +11,7 @@ namespace Sefin.CsProB.UnitTests
         [TestMethod]
         public void TestCollectionPerfomance()
         {
-            var list = Enumerable.Range(0, 20000000).ToList();
+            var list = Enumerable.Range(0, 10000000).ToList();
 
             var dictionary = list.ToDictionary(n=>n);
 

@@ -26,4 +26,5 @@ namespace GenericsPlay
             _storage[index] = null;
         }
     }
+
 }

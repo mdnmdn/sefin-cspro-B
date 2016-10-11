@@ -12,6 +12,11 @@ namespace GenericsPlay
         public int Size { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
+
+        public override string ToString()
+        {
+            return $"[ID: {Id} - Name: {Name}]";
+        }
     }
 
     public class Invoice : Document {

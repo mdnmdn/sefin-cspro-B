@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +12,14 @@ namespace GenericsPlay
 
     public delegate int OperazioneInteri(int val1, int val2);
 
+    [Serializable]
     public delegate T Transformazione<T>(T val);
 
-    
 
+    [Category("test")]
     public class DelegatePlay
     {
-        void Intro() {
+        public void Intro() {
             FunzioneSenzaParametri f;
 
             f = MioMetodo;
@@ -80,6 +83,162 @@ namespace GenericsPlay
         bool DocumentiPerDate(Document doc1, Document doc2)
         {
             return doc1.Date > doc2.Date;
+        }
+
+
+
+        public void TestSort() {
+
+            var docList = new List<Document> {
+                new Document { Id = 12, Name ="Invoice XXXX"},
+                new Document { Id = 34, Name ="Invoice XXXX"},
+                new Document { Id = 1, Name ="Invoice AAAA"},
+                new Document { Id = 27, Name ="Bill mmm"},
+            };
+
+            Trace.WriteLine("Original sort");
+            Trace.WriteLine(String.Join(", ", docList));
+
+            docList.Sort(OrderById);
+            Trace.WriteLine("Sort by Id");
+            Trace.WriteLine(String.Join(", ", docList));
+
+            docList.Sort(OrderByName);
+            Trace.WriteLine("Sort by Name");
+            Trace.WriteLine(String.Join(", ", docList));
+
+            var orderByID = true;
+
+            Comparison<Document> comparer;
+
+            if (orderByID) comparer = OrderById;
+            else comparer = OrderByName;
+
+            docList.Sort(comparer);
+
+        }
+
+        int OrderById(Document doc1, Document doc2) {
+            //Trace.WriteLine($"   > doc1: {doc1}   doc2: {doc2}");
+
+            if (doc1.Id > doc2.Id) return 1;
+            return -1;
+        }
+
+        int OrderByName(Document doc1, Document doc2) {
+            return doc1.Name.CompareTo(doc2.Name);
+        }
+
+
+        public void LambdaPlay() {
+
+            var docList = new List<Document> {
+                new Document { Id = 12, Name ="Invoice XXXX"},
+                new Document { Id = 34, Name ="Invoice XXXX"},
+                new Document { Id = 1, Name ="Invoice AAAA"},
+                new Document { Id = 27, Name ="Bill mmm"},
+            };
+
+            Trace.WriteLine("Original sort");
+            Trace.WriteLine(String.Join(", ", docList));
+
+            // -----
+            Comparison<Document> orderByNameDescending =
+                    (d1, d2) => d2.Name.CompareTo(d1.Name);
+
+            docList.Sort(orderByNameDescending);
+
+            docList.Sort((d1, d2) => d2.Name.CompareTo(d1.Name));
+
+            Trace.WriteLine("Sort by Name descending");
+            Trace.WriteLine(String.Join(", ", docList));
+
+            // -----------------
+            Comparison<Document> orderByIdDescending =
+                    (doc1, doc2) => {
+                        if (doc2.Id > doc1.Id) return 1;
+                        if (doc2.Id == doc1.Id) return 0;
+                        return -1;
+                    };
+
+            docList.Sort(orderByIdDescending);
+            Trace.WriteLine("Sort by Id descending");
+            Trace.WriteLine(String.Join(", ", docList));
+
+
+            // Extension methods
+            int num = 33.Double().Double().Double().Double();
+
+            num = NumberExtender.Double(33);
+        }
+
+        public void LambdaPlay2() {
+
+            Func<Document, Document, int> comparerLike =
+                (a, b) => 23;
+
+            Action action = () => Trace.WriteLine("I'm an action!");
+
+            Action<string> stampaStringa =
+                    txt => Trace.WriteLine("print: " + txt);
+
+        }
+
+        public void ClosurePlay() {
+
+            int val = 5;
+
+            Action process = () => Trace.WriteLine("val: " + val);
+
+            process();
+
+            Action[] actions = new Action[10];
+
+            for (val = 0; val < 10; val++) {
+                actions[val] = process;
+            }
+
+            foreach (var action in actions) {
+                action();
+            }
+        }
+
+        public void ClosurePlay2()
+        {
+
+            Action[] actions = new Action[10];
+
+            for (var i = 0; i < 10; i++)
+            {
+                var val = i;
+                actions[val] = () => Trace.WriteLine("val: " + val);
+            }
+
+            foreach (var action in actions)
+            {
+                action();
+            }
+        }
+
+        public void ClosurePlayMultiThread()
+        {
+            //var val = 0;
+            for (var i = 0; i < 10; i++)
+            {
+                var val = i;
+                System.Threading.ThreadPool.QueueUserWorkItem(
+                    _ => Trace.WriteLine("val: " + val)
+                    );
+            }
+
+            
+        }
+    }
+
+    public static class NumberExtender {
+
+        public static int Double(this int number) {
+            return number * 2;
         }
     }
 
