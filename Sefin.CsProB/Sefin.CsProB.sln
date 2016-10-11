@@ -17,6 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{F39AC593-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sefin.CsPro.Commons", "Libs\Sefin.CsPro.Commons\Sefin.CsPro.Commons.csproj", "{DCC2B878-A346-41F8-A603-2D492B04CEF7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{A6D396C7-4132-4F84-B450-34D74AD67ACA}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\northwind.sql = Assets\northwind.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
