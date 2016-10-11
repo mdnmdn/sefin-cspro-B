@@ -22,6 +22,7 @@ namespace Sefin.ApiTester
 
         static void Init() {
             new DelegatePlay();
+            new LinqPlay.LinqPlayground();
         }
     }
 }
