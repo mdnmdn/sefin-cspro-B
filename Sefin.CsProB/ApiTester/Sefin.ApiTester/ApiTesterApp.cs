@@ -133,9 +133,11 @@ namespace Sefin.ApiTester
                 //ResultGrid.Rows.Clear();
                 ResultGrid.Columns.Clear();
                 return;
-            }            
-            if (typeof(IEnumerable).IsAssignableFrom(result.GetType())) {
-                ResultGrid.DataSource = result;
+            }
+            var type = result.GetType();
+            if (typeof(IEnumerable).IsAssignableFrom(type)) {
+                var data = ((IEnumerable)result).Cast<object>().ToList();
+                ResultGrid.DataSource = data;
                 
             }
         }
