@@ -104,6 +104,7 @@ namespace LinqPlay
                 "uno","due","tre","quattro","cinque"
             };
 
+            // SELECT ...  FROM strings as s
             var res1 = from s in strings
                        where s.Contains("e") && s.Length <= 3
                        select s.ToUpper();
@@ -161,6 +162,7 @@ namespace LinqPlay
             .Where(o => o.Length <= 3)
             .Select(o => new
             {
+                o,
                 o.StringUpper,
                 o.Length
             });

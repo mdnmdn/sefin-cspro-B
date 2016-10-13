@@ -59,6 +59,7 @@ namespace LinqPlay
 
             var prods = db.Products;
 
+
             prods = prods.Where(p => p.Category.Id == 1);
 
             int totalProds = prods.Sum(p => p.UnitsInStock);
@@ -79,8 +80,7 @@ namespace LinqPlay
             foreach (var cat in categories)
             {
                 var prodCount = db.Products
-                                        .Where(p => p.Category.Id == cat.Id)
-                                        .Count();
+                                        .Count(p => p.Category.Id == cat.Id);
 
                 prodCount = db.Products.Count(p => p.Category.Id == cat.Id);
 
@@ -98,9 +98,30 @@ namespace LinqPlay
                             NumProds = db.Products.Count(p => p.Category.Id == c.Id)
                         });
 
-            catProductCount.WriteLog();
-
+            catProductCount.WriteLog();            
             return catProductCount;
+        }
+
+
+        public object LinqExercises1()
+        {
+            var db = new NorthwindDatabase();
+
+            // Elenco di prodotti che hanno elementi a magazzino
+
+            // Elenco di prodotti in nome/descrizione/categoria contiene 'bev' (da gestire come parametro)
+
+            // Valore totale di prodotti che ho a magazzino per categoria
+
+            // Valore totale di prodotti riordinati per prodotto
+
+            // Elenco da riordinare
+
+            // Elenco dei client che ho in USA
+
+            // Elenco delle categorie ordinate per quantità di prodotto
+
+            return null;
         }
 
     }
