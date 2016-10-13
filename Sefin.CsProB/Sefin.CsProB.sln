@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{A6D396
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqPlay", "LinqPlay\LinqPlay.csproj", "{ABF842B7-930C-468A-BE3A-70A832CF1740}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFPlayground", "EFPlayground\EFPlayground.csproj", "{C2F02E7E-217E-42C4-9574-D4A299793277}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{ABF842B7-930C-468A-BE3A-70A832CF1740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABF842B7-930C-468A-BE3A-70A832CF1740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABF842B7-930C-468A-BE3A-70A832CF1740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F02E7E-217E-42C4-9574-D4A299793277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F02E7E-217E-42C4-9574-D4A299793277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F02E7E-217E-42C4-9574-D4A299793277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F02E7E-217E-42C4-9574-D4A299793277}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

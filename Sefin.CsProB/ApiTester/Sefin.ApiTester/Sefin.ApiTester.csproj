@@ -36,7 +36,19 @@
     <ApplicationIcon>app.api.logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender">
+      <HintPath>..\..\..\..\..\..\..\..\Tools\EntityFramework.Profiler\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,6 +85,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +105,10 @@
     <Content Include="assets\app.api.logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EFPlayground\EFPlayground.csproj">
+      <Project>{c2f02e7e-217e-42c4-9574-d4a299793277}</Project>
+      <Name>EFPlayground</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GenericsPlay\GenericsPlay.csproj">
       <Project>{ff96b103-0e42-473f-aed9-9598838f44da}</Project>
       <Name>GenericsPlay</Name>

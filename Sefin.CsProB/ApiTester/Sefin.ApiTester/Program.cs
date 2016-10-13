@@ -15,6 +15,9 @@ namespace Sefin.ApiTester
         [STAThread]
         static void Main()
         {
+
+            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ApiTesterApp());
@@ -23,6 +26,7 @@ namespace Sefin.ApiTester
         static void Init() {
             new DelegatePlay();
             new LinqPlay.LinqPlayground();
+            new EFPlayground.NW.NorthwindContext();
         }
     }
 }
