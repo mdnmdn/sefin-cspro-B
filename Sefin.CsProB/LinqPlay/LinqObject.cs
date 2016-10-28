@@ -46,6 +46,8 @@ namespace LinqPlay
                                     p.Category.CategoryName
                                 });
 
+            return res3;
+
             //res3.WriteLog();
 
             var num = res.Count();

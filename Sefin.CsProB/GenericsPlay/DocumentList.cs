@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 namespace GenericsPlay
 {
 
-
-
     public class DocumentList<T> where T: Document
     {
 

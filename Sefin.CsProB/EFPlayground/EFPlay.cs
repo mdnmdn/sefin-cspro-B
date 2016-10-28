@@ -15,7 +15,7 @@ namespace EFPlayground
             using (var ctx = new NorthwindContext())
             {
                 //return ctx.Categories.ToList();
-
+                
                 ctx.Database.Log = txt => Trace.WriteLine(">>> " + txt);
 
                 //var cat = ctx.Categories.FirstOrDefault();
@@ -123,11 +123,74 @@ namespace EFPlayground
                             .Skip(100).Take(20);
 
                 return orders.ToList();
-
-
                 
 
             }
         }
+
+
+        public object TestEf2() {
+            using (var ctx = new NorthwindContext()) {
+
+                var prods1 = ctx.Products
+                        .Where( p => p.ProductName.StartsWith("S"))
+                        .Select(p => new {
+                                p.ProductID,
+                                p.ProductName,
+                                p.UnitPrice,
+                                p.Categories.CategoryName
+                            });
+
+                return prods1;
+
+                var prods2 = ctx.Products
+                            .Include(p => p.Categories)
+                            .Include(p => p.Order_Details)
+                           .Where(p => p.ProductName.StartsWith("S"));
+
+                //foreach (var p in prods2) {
+                //    Trace.WriteLine($"{p.ProductID}. {p.ProductName} ({p.Categories.CategoryName}) "+
+                //        $" Ordini: {p.Order_Details.Count()}");
+                //}
+
+                var prods3 = ctx.Products
+                               .Where(p => p.Categories.CategoryName.Contains("S"))
+                                .Select(p => new {
+                                    p.ProductID,
+                                    p.ProductName,
+                                    p.UnitPrice,
+                                    p.Categories.CategoryName,
+                                    NumOrdini = p.Order_Details.Count(),
+                                    NumProdottiOrdinati = p.Order_Details.Sum(od => od.Quantity),
+                                    Orders = p.Order_Details
+                                });
+
+                //var p1 = prods3.FirstOrDefault();
+
+                return prods3.ToList();
+                //foreach (var p in prods3)
+                //{
+                //    Trace.WriteLine($"{p.ProductID}. {p.ProductName} ({p.Categories.CategoryName}) ");
+                //}
+
+            }
+
+            return null;
+        }
+
+        /*
+
+   * Stampa Id, Nome del prodotto 11
+   * Stampa Id, Nome,CategoryName del prodotto 11
+   * Id, Nome di Tutti i prodotti della categoria 2
+   * Id, Nome, CategoryName di Tutti i prodotti della categoria 2
+   * Id, Nome, CategoryName di Tutti i prodotti delle categorie che iniziano per C
+   * Id, Nome delle categoria che hanno prodotti in riordino (flag reorder?)
+   * Id, Nome, CategoryName di Tutti i prodotti da riordinare (unitinstock e reorder level)
+   * Id, Nome delle categoria che hanno prodotti da riordinare (unitinstock e reorder level)
+   * Id, Nome e num prodotti di tutte le categorie
+
+
+   */
     }
 }

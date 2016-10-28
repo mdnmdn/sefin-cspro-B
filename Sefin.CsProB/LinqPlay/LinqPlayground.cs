@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,8 @@ namespace LinqPlay
                                .Where(s => s.Length > 3)
                                .Select(s => "@" + s);
             res10.WriteLog();
+
+            var res10b = res10.OrderBy(s => s.Length).Select(s => @"---" + s);
 
             var res11 = strings.Where(s => s.Contains("e"))
                                .Select(s => s.ToUpper())
@@ -129,6 +132,18 @@ namespace LinqPlay
                        orderby s.Length
                        select s;
 
+            DataTable data = new DataTable();
+
+            var res5 = data.Rows.Cast<DataRow>()
+                    .Where(r => (int)r["id"] == 5)
+                    .Select(r => new {
+                        Id = (int)r["id"],
+                        Name = (string) r["name"]
+                    });
+
+            var companies = data.Rows.Cast<DataRow>()
+                    .Where(r => (int)r["id"] == 5)
+                    .Select(r => new Company(r));
 
         }
 
@@ -184,6 +199,18 @@ namespace LinqPlay
             Trace.WriteLine($"   {logName}>{data}");
             return data;
         }
+
+        
+
+    }
+
+    public class Company
+    {
+        public Company() { }
+        public Company(DataRow row)
+        {
+        }
+
 
     }
 }

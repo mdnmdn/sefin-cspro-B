@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GenericsPlay
 {
+    [Category("test")]
     public class GenericsPlayground
     {
         public void Intro() {
@@ -104,7 +108,10 @@ namespace GenericsPlay
             return default(T);
         }
 
-
+        public void TestCache() {
+            var doc = GetCache<Document>("sdfasdfa");
+            
+        }
 
         public T GetCache<T>(string key) where T:class {
             object res = null; //carico da cache...
@@ -114,6 +121,55 @@ namespace GenericsPlay
         public void AddCache<T>(string key, T data) where T : class
         {
             
+        }
+
+
+        public T Cached<T>(string key, Func<T> loader) where T: class
+        {
+            var cache = System.Runtime.Caching.MemoryCache.Default;
+
+            T result = cache[key] as T;
+
+            if (result == null) {
+                result = loader();
+                //cache.Add(null,null, new System.Runtime.Caching.CacheItemPolicy { }
+                cache[key] = result;
+            }
+
+            return result;
+        }
+
+
+        public void TestCached()
+        {
+            Trace.WriteLine("Before 1");
+            var docs = Cached("doclist", () => LoadDocuments());
+
+            Trace.WriteLine("After 1");
+
+            List<Document> docs2 = Cached("doclist", () => LoadDocuments());
+
+            Trace.WriteLine("After 2");
+
+            DataTable data = Cached("data", () => LoadTable());
+
+        }
+
+
+        /// <summary>
+        /// simula il caricamento di una lista di doc da db
+        /// </summary>
+        List<Document> LoadDocuments() {
+            Trace.WriteLine("LoadDocuments");
+            return new List<Document>() {
+
+            };
+        }
+
+        DataTable LoadTable()
+        {
+            Trace.WriteLine("LoadTable");
+            return new DataTable();
         }
 
 
@@ -134,6 +190,5 @@ namespace GenericsPlay
     }
 
     public class Customer { }
-    
 
 }
