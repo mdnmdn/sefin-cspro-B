@@ -141,7 +141,7 @@ namespace EFPlayground
                                 p.Categories.CategoryName
                             });
 
-                return prods1;
+                //return prods1;
 
                 var prods2 = ctx.Products
                             .Include(p => p.Categories)

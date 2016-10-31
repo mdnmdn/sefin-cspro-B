@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFPlay.cs" />
+    <Compile Include="EFReadWrite.cs" />
     <Compile Include="NW\Categories.cs">
       <DependentUpon>NorthwindContext.tt</DependentUpon>
     </Compile>
