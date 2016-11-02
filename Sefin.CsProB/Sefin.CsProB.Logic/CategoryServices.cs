@@ -7,12 +7,24 @@ using System.Threading.Tasks;
 
 namespace Sefin.CsProB.Logic
 {
-    public class CategoryServices
+    public class CategoryServices : BaseServices
     {
-        public int CountCategories() {
-            using (var ctx = new NorthwindContext()) {
-                return ctx.Categories.Count();
-            }
+
+        public int CountCategories()
+        {
+            return DataContext.Categories.Count();
         }
+
+        public List<Categories> ListCategories()
+        {
+            return DataContext.Categories.ToList();
+        }
+
+        public Categories GetCategory(int categoryId)
+        {
+            return DataContext.Categories.Find(categoryId);
+        }
+
+        
     }
 }

@@ -12,10 +12,10 @@ namespace Sefin.CsProB.WebApp.Controllers
         public ActionResult Index()
         {
 
-            var categoryService = new CategoryServices();
-
-            ViewBag.NumCategories = categoryService.CountCategories();
-
+            using (var categoryService = new CategoryServices())
+            {
+                ViewBag.NumCategories = categoryService.CountCategories();
+            }
             return View();
         }
 

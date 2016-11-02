@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseServices.cs" />
     <Compile Include="CategoryServices.cs" />
     <Compile Include="Dal\Categories.cs" />
     <Compile Include="Dal\CustomerDemographics.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Dal\Shippers.cs" />
     <Compile Include="Dal\Suppliers.cs" />
     <Compile Include="Dal\Territories.cs" />
+    <Compile Include="ProductServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
