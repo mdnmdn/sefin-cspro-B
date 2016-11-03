@@ -9,7 +9,9 @@ namespace Sefin.CsProB.Logic
 {
     public class ProductServices : BaseServices
     {
-        
+
+        public ProductServices(NorthwindContext ctx):base(ctx) {
+        }
 
         public int CountProducts()
         {            

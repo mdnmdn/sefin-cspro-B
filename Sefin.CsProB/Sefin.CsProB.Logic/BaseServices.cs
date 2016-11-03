@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Sefin.CsProB.Logic
 {
-    public abstract class BaseServices:IDisposable
+    public abstract class BaseServices
     {
+        public BaseServices(NorthwindContext ctx) {
+            _dataContext = ctx;
+        }
+
         #region DataContext
         NorthwindContext _dataContext;
         protected NorthwindContext DataContext
@@ -17,15 +21,6 @@ namespace Sefin.CsProB.Logic
         }
         #endregion
 
-        #region IDisposable
-        public virtual void Dispose()
-        {
-            if (_dataContext != null)
-            {
-                _dataContext.Dispose();
-                _dataContext = null;
-            }
-        }
-        #endregion
+       
     }
 }
