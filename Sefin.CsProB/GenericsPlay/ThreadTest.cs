@@ -204,8 +204,9 @@ namespace GenericsPlay
         }
 
         public async Task<Document> LoadDocument() {
-
-            var task = Task.Factory.StartNew<Document>(() =>
+            
+            // corretto
+            var task = await Task.Run(() =>
             {
                 var threadId2 = Thread.CurrentThread.ManagedThreadId;
                 Trace.WriteLine($" > carico doc {threadId2}");
@@ -217,7 +218,7 @@ namespace GenericsPlay
                 };
             });
 
-            return task.Result;
+            return task;
         }
 
         public async Task<List<string>> ReadCompanies() {
