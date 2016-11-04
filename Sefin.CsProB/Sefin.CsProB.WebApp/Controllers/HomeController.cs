@@ -25,6 +25,9 @@ namespace Sefin.CsProB.WebApp.Controllers
             ViewBag.NumCategories = _categoryService.CountCategories();
 
             var prodService = Kernel.Get<ProductServices>();
+
+            var prodServic1e = ResolveObject<ProductServices>();     
+
             prodService.CountProducts();
 
             return View();

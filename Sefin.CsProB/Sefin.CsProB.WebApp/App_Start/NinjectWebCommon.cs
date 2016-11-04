@@ -12,6 +12,8 @@ namespace Sefin.CsProB.WebApp.App_Start
     using Ninject.Web.Common;
     using Logic;
     using Logic.Dal;
+    using Commons;
+    using Libs;
 
     public static class NinjectWebCommon 
     {
@@ -66,6 +68,8 @@ namespace Sefin.CsProB.WebApp.App_Start
             kernel.Bind<CategoryServices>().ToSelf().InRequestScope();
             kernel.Bind<ProductServices>().ToSelf().InRequestScope();
             kernel.Bind<NorthwindContext>().ToSelf().InRequestScope();
+
+            kernel.Bind<IAppContext>().To<WebApplicationContext>().InRequestScope();
 
             //kernel.Bind<Categories>().ToMethod(
             //    ctx => new Categories {

@@ -21,6 +21,5 @@ namespace Sefin.CsProB.Logic
         }
         #endregion
 
-       
     }
 }

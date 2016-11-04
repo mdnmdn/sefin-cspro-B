@@ -9,9 +9,13 @@ namespace Sefin.CsProB.WebApp.Controllers
 {
     public abstract class ControllerBase : Controller
     {
-        public IKernel Kernel
+        protected IKernel Kernel
         {
             get { return (IKernel)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IKernel)); }
+        }
+
+        protected T ResolveObject<T>() {
+            return Kernel.Get<T>();
         }
     }
 }

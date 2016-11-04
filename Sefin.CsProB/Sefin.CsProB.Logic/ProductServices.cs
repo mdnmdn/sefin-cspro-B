@@ -1,4 +1,4 @@
-﻿using Ninject;
+﻿using Sefin.CsProB.Commons;
 using Sefin.CsProB.Logic.Dal;
 using System;
 using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace Sefin.CsProB.Logic
 {
     public class ProductServices : BaseServices
     {
-        private IKernel _kernel;
+        private IAppContext _appContext;
 
-        public ProductServices(NorthwindContext ctx, IKernel kernel):base(ctx) {
-            _kernel = kernel;
+        public ProductServices(NorthwindContext ctx, IAppContext appContext):base(ctx) {
+            _appContext = appContext;
         }
 
         public int CountProducts()
@@ -22,8 +22,9 @@ namespace Sefin.CsProB.Logic
         }
 
         public void ProcessProducts() {
-            _kernel.Get<CategoryServices>();
-            var categoryService = new CategoryServices(DataContext);
+            // _kernel.Get<CategoryServices>();
+            //var categoryService = new CategoryServices(DataContext);
+            var catSvc = _appContext.ResolveObject<CategoryServices>();
         }
 
     }
